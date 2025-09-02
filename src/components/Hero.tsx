@@ -123,11 +123,11 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Animated canvas background */}
-      {/* <canvas 
+      <canvas 
         ref={canvasRef} 
         className="absolute inset-0 w-full h-full"
         style={{ background: 'linear-gradient(125deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}
-      /> */}
+      />
       
       {/* Floating crypto icons */}
       <div className="absolute inset-0 overflow-hidden">
@@ -149,7 +149,7 @@ const Hero = () => {
       </div>
       
       {/* Animated gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/4 w-96 h-98 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/20 to-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       
       <div className="container mx-auto px-4 py-20 relative z-10">
@@ -188,7 +188,7 @@ const Hero = () => {
             <br />
             <span className="inline-block bg-gradient-to-r from-primary via-blue-500 to-purple-600 bg-clip-text text-transparent relative">
               with Confidence
-              <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-blue-500 to-purple-600 rounded-full"></div>
+              {/* <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-blue-500 to-purple-600 rounded-full"></div> */}
             </span>
           </h1>
           
