@@ -65,12 +65,69 @@ const cryptoData: CryptoData[] = [
   }
 ];
 
+// Additional data for the second chart
+const tradingPairsData = [
+  {
+    pair: "BTC/USDT",
+    price: "$43,256.78",
+    change: "+2.45%",
+    volume: "$28.4B",
+    high: "$43,500.00",
+    low: "$42,100.00",
+    isPositive: true,
+    chartData: [42100, 42300, 42500, 42700, 42900, 43256]
+  },
+  {
+    pair: "ETH/USDT",
+    price: "$2,687.92",
+    change: "+1.87%",
+    volume: "$14.2B",
+    high: "$2,710.50",
+    low: "$2,620.75",
+    isPositive: true,
+    chartData: [2620, 2640, 2660, 2675, 2680, 2687]
+  },
+  {
+    pair: "SOL/USDC",
+    price: "$98.45",
+    change: "+5.67%",
+    volume: "$3.8B",
+    high: "$99.20",
+    low: "$92.10",
+    isPositive: true,
+    chartData: [92, 93, 95, 96, 97, 98.45]
+  },
+  {
+    pair: "XRP/USDT",
+    price: "$0.62",
+    change: "-1.25%",
+    volume: "$2.1B",
+    high: "$0.64",
+    low: "$0.61",
+    isPositive: false,
+    chartData: [0.63, 0.625, 0.62, 0.615, 0.618, 0.62]
+  },
+  {
+    pair: "ADA/BTC",
+    price: "0.000012",
+    change: "+0.85%",
+    volume: "$450M",
+    high: "0.0000122",
+    low: "0.0000118",
+    isPositive: true,
+    chartData: [0.0000118, 0.0000119, 0.0000120, 0.0000121, 0.0000121, 0.0000120]
+  }
+];
+
 const CryptoPrices = () => {
   const [data, setData] = useState<CryptoData[]>(cryptoData);
+  const [tradingData, setTradingData] = useState(tradingPairsData);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isRefreshingTrading, setIsRefreshingTrading] = useState(false);
   const [activeCrypto, setActiveCrypto] = useState<number | null>(null);
+  const [activeTrading, setActiveTrading] = useState<number | null>(null);
 
-  // Simulate data refresh
+  // Simulate data refresh for cryptocurrencies
   const refreshData = () => {
     setIsRefreshing(true);
     setTimeout(() => {
@@ -86,10 +143,33 @@ const CryptoPrices = () => {
     }, 1000);
   };
 
+  // Simulate data refresh for trading pairs
+  const refreshTradingData = () => {
+    setIsRefreshingTrading(true);
+    setTimeout(() => {
+      setTradingData(prevData => 
+        prevData.map(item => ({
+          ...item,
+          price: item.pair.includes('$') 
+            ? `$${(parseFloat(item.price.replace('$', '').replace(',', '')) + (Math.random() - 0.5) * (item.pair === 'BTC/USDT' ? 100 : item.pair === 'ETH/USDT' ? 10 : 1)).toFixed(item.pair === 'BTC/USDT' ? 2 : 2)}`
+            : `${(parseFloat(item.price) + (Math.random() - 0.5) * 0.0000005).toFixed(7)}`,
+          change: `${Math.random() > 0.5 ? '+' : ''}${(Math.random() * 3).toFixed(2)}%`,
+          volume: `$${(parseFloat(item.volume.replace('$', '').replace('B', '').replace('M', '')) * (0.9 + Math.random() * 0.2)).toFixed(1)}${item.volume.includes('B') ? 'B' : 'M'}`,
+          isPositive: Math.random() > 0.5
+        }))
+      );
+      setIsRefreshingTrading(false);
+    }, 1000);
+  };
+
   // Auto-refresh data every 30 seconds
   useEffect(() => {
     const interval = setInterval(refreshData, 30000);
-    return () => clearInterval(interval);
+    const tradingInterval = setInterval(refreshTradingData, 30000);
+    return () => {
+      clearInterval(interval);
+      clearInterval(tradingInterval);
+    };
   }, []);
 
   return (
@@ -112,7 +192,7 @@ const CryptoPrices = () => {
           </p>
         </div>
         
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto mb-16">
           <div className="bg-gradient-to-br from-card to-card/80 border border-border/50 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm">
             {/* Table header with refresh button */}
             <div className="p-6 border-b border-border/50 flex justify-between items-center">
@@ -203,7 +283,99 @@ const CryptoPrices = () => {
             
             <div className="p-6 text-center border-t border-border/30">
               <button className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 font-medium transition-colors group">
-                <span>View All Markets</span>
+                <span>View All Cryptocurrencies</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Second chart for trading pairs */}
+        <div className="max-w-6xl mx-auto mb-16">
+          <div className="bg-gradient-to-br from-card to-card/80 border border-border/50 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm">
+            <div className="p-6 border-b border-border/50 flex justify-between items-center">
+              <h3 className="text-xl font-semibold text-foreground">Top Trading Pairs</h3>
+              <button 
+                onClick={refreshTradingData}
+                disabled={isRefreshingTrading}
+                className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50"
+              >
+                <RefreshCw className={`w-4 h-4 ${isRefreshingTrading ? 'animate-spin' : ''}`} />
+                <span>{isRefreshingTrading ? 'Updating...' : 'Refresh'}</span>
+              </button>
+            </div>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-muted/30">
+                  <tr>
+                    <th className="text-left p-4 text-muted-foreground font-medium">Pair</th>
+                    <th className="text-right p-4 text-muted-foreground font-medium">Price</th>
+                    <th className="text-right p-4 text-muted-foreground font-medium">24h Change</th>
+                    <th className="text-right p-4 text-muted-foreground font-medium">24h Volume</th>
+                    <th className="text-right p-4 text-muted-foreground font-medium">Chart</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tradingData.map((pair, index) => (
+                    <tr 
+                      key={index} 
+                      className={`border-b border-border/30 hover:bg-muted/20 transition-all duration-300 ${
+                        activeTrading === index ? 'bg-muted/40' : ''
+                      }`}
+                      onMouseEnter={() => setActiveTrading(index)}
+                      onMouseLeave={() => setActiveTrading(null)}
+                    >
+                      <td className="p-4">
+                        <div className="font-semibold text-foreground">{pair.pair}</div>
+                      </td>
+                      <td className="p-4 text-right">
+                        <div className="font-semibold text-foreground">{pair.price}</div>
+                      </td>
+                      <td className="p-4 text-right">
+                        <div className={`flex items-center justify-end space-x-1 ${
+                          pair.isPositive ? 'text-green-500' : 'text-red-500'
+                        }`}>
+                          {pair.isPositive ? (
+                            <TrendingUp className="w-4 h-4" />
+                          ) : (
+                            <TrendingDown className="w-4 h-4" />
+                          )}
+                          <span className="font-medium">{pair.change}</span>
+                        </div>
+                      </td>
+                      <td className="p-4 text-right">
+                        <div className="text-muted-foreground">{pair.volume}</div>
+                      </td>
+                      <td className="p-4 text-right">
+                        <div className="flex justify-end">
+                          <div className="w-20 h-10 relative">
+                            <svg viewBox="0 0 100 40" className="w-full h-full">
+                              <polyline
+                                fill="none"
+                                stroke={pair.isPositive ? "#10b981" : "#ef4444"}
+                                strokeWidth="2"
+                                points={pair.chartData.map((value, i) => {
+                                  const x = (i / (pair.chartData.length - 1)) * 100;
+                                  const max = Math.max(...pair.chartData);
+                                  const min = Math.min(...pair.chartData);
+                                  const y = 40 - ((value - min) / (max - min)) * 40;
+                                  return `${x},${y}`;
+                                }).join(" ")}
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            <div className="p-6 text-center border-t border-border/30">
+              <button className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 font-medium transition-colors group">
+                <span>View All Trading Pairs</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>

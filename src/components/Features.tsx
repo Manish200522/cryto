@@ -107,13 +107,13 @@ const Features = () => {
               }`}></div>
               
               <div className="relative z-10 p-8">
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-6 transition-transform duration-300 ${
+                {/* <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-6 transition-transform duration-300 ${
                   hoveredIndex === index ? "scale-110" : ""
                 }`}>
                   <div className="w-12 h-12 bg-background/80 rounded-xl flex items-center justify-center backdrop-blur-sm">
                     <feature.icon className="w-6 h-6 text-primary" />
                   </div>
-                </div>
+                </div> */}
                 
                 <h3 className="text-xl font-semibold text-foreground mb-3 flex items-center">
                   {feature.title}
@@ -127,16 +127,16 @@ const Features = () => {
                 </p>
                 
                 {/* Hover effect line */}
-                <div className={`h-0.5 bg-gradient-to-r from-primary to-purple-600 mt-4 transition-all duration-300 ${
+                {/* <div className={`h-0.5 bg-gradient-to-r from-primary to-purple-600 mt-4 transition-all duration-300 ${
                   hoveredIndex === index ? "w-full" : "w-0"
-                }`}></div>
+                }`}></div> */}
               </div>
             </div>
           ))}
         </div>
 
         {/* Stats section */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {/* <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="p-6 rounded-xl bg-gradient-to-b from-muted/30 to-muted/10 border border-border/50 backdrop-blur-sm">
             <div className="text-3xl font-bold text-primary mb-2">99.9%</div>
             <div className="text-muted-foreground">Uptime</div>
@@ -153,7 +153,7 @@ const Features = () => {
             <div className="text-3xl font-bold text-primary mb-2">24/7</div>
             <div className="text-muted-foreground">Support</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

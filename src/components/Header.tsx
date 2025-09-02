@@ -26,7 +26,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-3 z-10">
-              <div className="relative">
+              {/* <div className="relative">
                 <div className="w-10 h-10 bg-gradient-to-br from-primary via-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-white">
                     <circle cx="12" cy="12" r="10"></circle>
@@ -35,25 +35,25 @@ const Header = () => {
                   </svg>
                 </div>
                 <div className="absolute -inset-1.5 bg-primary/30 rounded-xl blur-sm -z-10"></div>
-              </div>
+              </div> */}
               <span className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">CryptoCoin</span>
             </div>
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="group text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
+              <a href="#features" className=" text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
                 <span>Features</span>
                 <div className="h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
               </a>
-              <a href="#markets" className="group text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
+              <a href="#markets" className=" text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
                 <span>Markets</span>
                 <div className="h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
               </a>
-              <a href="#about" className="group text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
+              <a href="#about" className=" text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
                 <span>About</span>
                 <div className="h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
               </a>
-              <a href="#pricing" className="group text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
+              <a href="#pricing" className=" text-muted-foreground hover:text-foreground transition-all duration-300 flex flex-col items-center">
                 <span>Pricing</span>
                 <div className="h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
               </a>

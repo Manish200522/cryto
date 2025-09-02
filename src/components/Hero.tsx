@@ -123,11 +123,11 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Animated canvas background */}
-      <canvas 
+      {/* <canvas 
         ref={canvasRef} 
         className="absolute inset-0 w-full h-full"
         style={{ background: 'linear-gradient(125deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}
-      />
+      /> */}
       
       {/* Floating crypto icons */}
       <div className="absolute inset-0 overflow-hidden">
@@ -208,16 +208,16 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-600 transition-all duration-300 group-hover:scale-105"></div>
             </Button>
             
-            <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-4 group border-foreground/20 text-foreground">
+            {/* <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg px-8 py-4 group border-foreground/20 text-foreground">
               <span className="relative z-10 flex items-center">
                 <Play className="mr-2 h-5 w-5" />
                 Watch Demo
               </span>
-            </Button>
+            </Button> */}
           </div>
           
           {/* Animated Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
             <div className="text-center p-6 rounded-xl bg-muted/30 border border-border/50 backdrop-blur-sm hover:bg-muted/50 transition-colors">
               <div className="text-3xl md:text-4xl font-bold text-primary mb-2">$2.5B+</div>
               <div className="text-muted-foreground">Trading Volume</div>
@@ -230,7 +230,7 @@ const Hero = () => {
               <div className="text-3xl md:text-4xl font-bold text-primary mb-2">99.9%</div>
               <div className="text-muted-foreground">Uptime</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       
